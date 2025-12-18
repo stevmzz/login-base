@@ -1,4 +1,5 @@
 const sql = require('mssql'); // Import library for SQL Server connection
+const logger = require('./logger'); // Import professional logger
 require('dotenv').config(); // Load environment variables from .env file
 
 // Configuration for SQL Server connection
@@ -35,12 +36,12 @@ async function connectDB() {
     try {
         pool = new sql.ConnectionPool(config); // Establish connection
         await pool.connect(); // Ensure the pool is connected
-        console.log('Connected to SQL Server');
+        logger.info('Connected to SQL Server');
         return pool; // Return the connection pool
     }
 
     catch (e) {
-        console.error('Database connection failed:', e);
+        logger.error(`Database connection failed: ${e.message}`);
         setTimeout(connectDB, 5000); // Retry connection after 5 seconds
     }
 }
@@ -64,7 +65,7 @@ function getPool() {
 async function closeDB() {
     if (pool) {
         await pool.close();
-        console.log('Database connection closed');
+        logger.info('Database connection closed');
     }
 }
 
