@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+
 const sessionConfig = require('./config/session');
 const { connectDB } = require('./config/database');
 const logger = require('./config/logger');
+
 const healthRoutes = require('./routes/health');
+const authRoutes = require('./routes/auth');
 
 const app = express(); // Initialize Express app
 
@@ -28,6 +31,7 @@ connectDB();
 
 // Routes
 app.use('/api', healthRoutes);
+app.use('/api/auth', authRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {
