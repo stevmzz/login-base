@@ -5,7 +5,7 @@ require('dotenv').config(); // Load environment variables from .env file
 // Configuration for SQL Server connection
 const config = {
     server: process.env.DB_SERVER || 'localhost', // Server address
-    database: process.env.DB_NAME || 'database', // Database name
+    database: process.env.DB_NAME || 'login_base', // Database name
     
     authentication: {
         type: 'default',
@@ -16,7 +16,7 @@ const config = {
     },
     
     options: {
-        encrypt: true, // Use encryption
+        encrypt: false, // Disable encryption for local development
         trustServerCertificate: true, // Trust server certificate
         port: parseInt(process.env.DB_PORT) || 1433 // Port number
     }
