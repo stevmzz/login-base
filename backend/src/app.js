@@ -1,42 +1,45 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require('express'); // Import Express web framework
+const cors = require('cors'); // Import CORS middleware for cross-origin requests
+const bodyParser = require('body-parser'); // Import body parser for request parsing
 
-const sessionConfig = require('./config/session');
-const { connectDB } = require('./config/database');
-const logger = require('./config/logger');
+const sessionConfig = require('./config/session'); // Import session configuration
+const { connectDB } = require('./config/database'); // Import database connection function
+const logger = require('./config/logger'); // Import Winston logger
 
-const healthRoutes = require('./routes/health');
-const authRoutes = require('./routes/auth');
+const healthRoutes = require('./routes/health'); // Import health check routes
+const authRoutes = require('./routes/auth'); // Import authentication routes
+const usersRoutes = require('./routes/users'); // Import user routes
 
-const app = express(); // Initialize Express app
+const app = express(); // Initialize Express application
 
-// Logging middleware
+// Logging middleware - logs every incoming HTTP request
 app.use((req, res, next) => {
   logger.info(`${req.method} ${req.url}`);
   next();
 });
 
-// Middlewares
+// Application middlewares
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true
+  origin: process.env.CLIENT_URL || 'http://localhost:3000', // Allow requests from frontend
+  credentials: true // Allow cookies in cross-origin requests
 }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(sessionConfig);
+app.use(bodyParser.json()); // Parse JSON request bodies
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded request bodies
+app.use(sessionConfig); // Configure session management
 
-// Connect to database
+// Establish database connection
 connectDB();
 
-// Routes
+// Register routes
 app.use('/api', healthRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/users', usersRoutes);
 
-// Error handler
+// Error handling middleware - catches errors from routes and middlewares
 app.use((err, req, res, next) => {
   logger.error(`Error: ${err.message}`);
   res.status(500).json({ error: 'Internal server error' });
 });
 
+// Export Express application for use in server.js
 module.exports = app;
