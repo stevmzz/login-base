@@ -1,9 +1,9 @@
 -- Create the database
-CREATE DATABASE database;
+CREATE DATABASE login_base;
 GO
 
 -- Switch to the newly created database
-USE database;
+USE login_base;
 GO
 
 -- Create the users table
