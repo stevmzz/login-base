@@ -16,9 +16,9 @@ export function Carousel() {
   const current = CAROUSEL_IMAGES[currentIndex]
 
   return (
-    <div className="hidden lg:flex w-1/2 h-screen bg-dark items-center justify-center">
+    <div className="hidden lg:flex w-1/2 h-screen bg-dark items-center justify-center pr-0 pl-8 py-8">
       {/* Carousel Box: 90% of container size with rounded corners and shadow */}
-      <div className="relative w-[90%] h-[90%] rounded-2xl overflow-hidden shadow-2xl">
+      <div className="relative w-full h-[90%] rounded-2xl overflow-hidden shadow-2xl">
         {/* Image: Displays current carousel image with smooth opacity transition */}
         <img
           src={current.src}

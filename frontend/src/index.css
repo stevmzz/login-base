@@ -9,5 +9,6 @@
 }
 
 body {
+    @apply bg-dark;
   font-family: system-ui, -apple-system, sans-serif;
 }

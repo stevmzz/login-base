@@ -1,4 +1,5 @@
 import { Carousel } from "../components/common/Carousel";
+import { LoginForm } from "../components/auth/LoginForm";
 
 /**
  * Main login page layout with carousel on the left and login form placeholder on the right.
@@ -12,11 +13,9 @@ export function Login() {
     <div className="flex min-h-screen bg-dark">
       {/* Carousel component: 50% width on large screens, hidden on mobile */}
       <Carousel />
-
+      
       {/* Login form container: Full width on mobile, 50% on large screens */}
-      <div className="w-full lg:w-1/2 bg-dark">
-        {/* Aquí irá el formulario de login */}
-      </div>
+      <LoginForm />
     </div>
   );
 }
