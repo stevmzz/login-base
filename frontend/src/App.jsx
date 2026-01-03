@@ -1,15 +1,22 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Login.jsx';
+import { Register } from './pages/Register.jsx';
 
 /**
  * This component serves as the entry point of the app.
- * It renders the `Login` page as the main view.
+ * It sets up routing between Login and Register pages.
  *
  * @function App
- * @returns {JSX.Element} The root application component rendering the Login page.
+ * @returns {JSX.Element} The root application component with routing
  */
 function App() {
   return (
-    <Login />
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 

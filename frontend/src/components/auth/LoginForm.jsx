@@ -26,9 +26,10 @@ export function LoginForm() {
             <h1 className="text-3xl font-bold text-light">Hello Again!</h1>
             <p className="text-sm text-light">
               Not a member?{' '}
-              <a href="#" className="text-light font-semibold hover:underline">
-                Register now
-              </a>
+              <button
+                onClick={() => window.location.href = '/register'}
+                className="text-light font-semibold hover:underline">Register
+              </button>
             </p>
           </div>
           <p className="text-light">Welcome back you've been missed!</p>
